@@ -5,16 +5,16 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"os"
-
+	"github.com/LuVlk/dadjoke/config"
 	"github.com/spf13/cobra"
+	"os"
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "dadjoke",
-	Short: "get random dad jokes to your terminal",
-	Long:  `Dadjoke CLI is a tool that provides you with random dad jokes`,
+	Short: "Get dad jokes to your terminal",
+	Long:  `Dadjoke CLI is a tool that provides you with awesome dad jokes`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -27,5 +27,7 @@ func Execute() {
 }
 
 func init() {
-
+	cobra.OnInitialize(func() {
+		cobra.CheckErr(config.Init())
+	})
 }

@@ -16,3 +16,15 @@ func MakeJokeFromJson(data []byte) (*Joke, error) {
 	}
 	return &joke, nil
 }
+
+func MakeJokesFromJson(data []byte) ([]Joke, error) {
+	jokes := struct {
+		Results []Joke `json:"results"`
+	}{}
+
+	err := json.Unmarshal(data, &jokes)
+	if err != nil {
+		return nil, err
+	}
+	return jokes.Results, nil
+}
